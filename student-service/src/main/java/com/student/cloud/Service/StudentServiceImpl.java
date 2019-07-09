@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -36,20 +37,22 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student fetchStudent(String Id) {
-        System.out.println("sdohdfsoghsdohoahsohfdi");
+
         HttpHeaders httpHeaders = new HttpHeaders();
         ResponseEntity<School[]> responseEntity;
         HttpEntity< String> entity = new HttpEntity<>("",httpHeaders);
         responseEntity = restTemplate.exchange("http://localhost:8080/smscloud/school"
                 , HttpMethod.GET,entity, School[].class);
-        System.out.println("succes got details");
+
 
         Optional<Student> optional = studentRepository.findById(Id);
         Student student1 = optional.get();
-        student1.setSchools(responseEntity.getBody());
-        School school = (School) Arrays.stream(responseEntity.getBody()).filter(school1 -> school1.getName().equalsIgnoreCase(student1.getSchoolname()));
+//        student1.setSchools(responseEntity.getBody());
+        List<School> list= Arrays.asList(responseEntity.getBody());
+        List<School> school =  list.stream().filter(school1 -> school1.getName()
+                .equalsIgnoreCase(student1.getSchoolname())).collect(Collectors.toList());
 
-        student1.setSchoolCity(school.getCity());
+        student1.setSchoolCity(school.get(0).getCity());
         return student1;
     }
 }

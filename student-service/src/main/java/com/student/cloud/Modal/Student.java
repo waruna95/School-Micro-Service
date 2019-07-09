@@ -24,8 +24,8 @@ public class Student {
     String schoolname;
     Integer grade;
 
-    @Transient
-    School[] schools;
+//    @Transient
+//    School[] schools;
 
     @Transient
     String schoolCity;
@@ -62,13 +62,13 @@ public class Student {
         this.grade = grade;
     }
 
-    public School[] getSchools() {
-        return schools;
-    }
-
-    public void setSchools(School[] schools) {
-        this.schools = schools;
-    }
+//    public School[] getSchools() {
+//        return schools;
+//    }
+//
+//    public void setSchools(School[] schools) {
+//        this.schools = schools;
+//    }
 
     public String getSchoolCity() {
         return schoolCity;

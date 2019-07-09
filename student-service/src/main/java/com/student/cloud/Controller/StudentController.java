@@ -22,15 +22,11 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-//    @Bean
-//    public RestTemplate getRestTemplate() {
-//        return restTemplate;
-//    }
-@Bean
 
-public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    return builder.build();
-}
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
     //save student
     @RequestMapping(value = "/student", method = RequestMethod.POST)
@@ -47,7 +43,7 @@ public RestTemplate restTemplate(RestTemplateBuilder builder) {
     //get one student
     @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> fetchStudent(@PathVariable String id){
-        System.out.println("ssdfghaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
         Student student = studentService.fetchStudent(id);
         if(student == null) {
             return ResponseEntity.notFound().build();
