@@ -1,10 +1,14 @@
 package com.student.cloud.Controller;
 
+import com.student.cloud.Modal.School;
 import com.student.cloud.Modal.Student;
 import com.student.cloud.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -13,8 +17,20 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
+    private RestTemplate restTemplate ;
+
+    @Autowired
     StudentService studentService;
 
+//    @Bean
+//    public RestTemplate getRestTemplate() {
+//        return restTemplate;
+//    }
+@Bean
+
+public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    return builder.build();
+}
 
     //save student
     @RequestMapping(value = "/student", method = RequestMethod.POST)
@@ -30,8 +46,9 @@ public class StudentController {
 
     //get one student
     @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Student> fetchStudent(@PathVariable String Id){
-        Student student = studentService.fetchStudent(Id);
+    public ResponseEntity<?> fetchStudent(@PathVariable String id){
+        System.out.println("ssdfghaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        Student student = studentService.fetchStudent(id);
         if(student == null) {
             return ResponseEntity.notFound().build();
         }else {
