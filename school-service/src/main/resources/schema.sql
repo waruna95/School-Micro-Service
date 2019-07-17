@@ -6,8 +6,8 @@
   );
 
   create table school (
-    id VARCHAR(255) NOT NULL,
-    city VARCHAR(255),
-    name VARCHAR(255),
-    PRIMARY KEY(id)
-  );
+     id VARCHAR(255) NOT NULL,
+     city VARCHAR(255),
+     name VARCHAR(255),
+     PRIMARY KEY(id)
+   );
