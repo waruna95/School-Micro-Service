@@ -7,8 +7,9 @@ spring:
     username: root
     password: 1qaz2wsx@
     driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
+    initialization-mode: always
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
 
