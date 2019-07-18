@@ -10,4 +10,6 @@ public interface SchoolService {
     List<School> fetchAllSchools();
     School fetchSchool(String Id);
 
+    List<School> getOnlySchools();
+
 }

@@ -3,6 +3,7 @@ package com.school.cloud.Controller;
 import com.school.cloud.Modal.School;
 import com.school.cloud.Service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +39,19 @@ public class SchoolController {
             return ResponseEntity.ok(school);
         }
 
+    }
+    @RequestMapping(value = "/school/names", method = RequestMethod.GET)
+    public ResponseEntity<?> fetchSchool(){
+        List<School> schools= schoolService.getOnlySchools();
+        if(schools == null) {
+            return ResponseEntity.notFound().build();
+        }else {
+            return new ResponseEntity<>(schools, HttpStatus.ACCEPTED);
+        }
+
 
     }
+
 
 
 }

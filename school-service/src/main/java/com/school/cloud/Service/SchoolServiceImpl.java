@@ -33,5 +33,9 @@ public class SchoolServiceImpl implements SchoolService{
         return school1;
     }
 
+    @Override
+    public List<School> getOnlySchools() {
+        return  schoolRepository.find("Thurstan College");
+    }
 
 }
