@@ -1,8 +1,10 @@
 package com.school.cloud.Service;
 
 
+import com.school.cloud.Modal.QueryGenerator;
 import com.school.cloud.Modal.School;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface SchoolService {
@@ -11,5 +13,7 @@ public interface SchoolService {
     School fetchSchool(String Id);
 
     List<School> getOnlySchools();
+
+    List<School> fetchQuery(QueryGenerator query);
 
 }

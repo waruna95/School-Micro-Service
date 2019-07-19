@@ -1,5 +1,6 @@
 package com.school.cloud.Controller;
 
+import com.school.cloud.Modal.QueryGenerator;
 import com.school.cloud.Modal.School;
 import com.school.cloud.Service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,17 @@ public class SchoolController {
     }
 
 
+    @RequestMapping(value = "/school/query", method = RequestMethod.GET)
+    @ResponseBody
+    public  ResponseEntity<?> getQuery(@RequestBody QueryGenerator query){
+        //System.out.println(query);
+        List<School> schools = schoolService.fetchQuery(query);
+        if(schools.equals(null)) {
+            return ResponseEntity.notFound().build();
+        }else {
+            return new ResponseEntity<>(schools, HttpStatus.ACCEPTED);
+        }
+
+    }
 
 }
