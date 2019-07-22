@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +54,7 @@ public class SchoolServiceImpl implements SchoolService{
 //        System.out.println(exeQuery);
 
         School school = new School();
+        List<School> schools = new ArrayList<>();
         // create our mysql database connection
         try {
             // String myDriver = "com.mysql.jdbc.Driver";
@@ -76,6 +78,7 @@ public class SchoolServiceImpl implements SchoolService{
                 school.setName(rs.getString("name"));
                 school.setCity(rs.getString("city"));
 
+                schools.add(school);
                 // print the results
                 //System.out.format("%s, %s, %s\n", id, name, city);
             }
@@ -84,6 +87,6 @@ public class SchoolServiceImpl implements SchoolService{
             System.out.println(e);
         }
         System.out.println(school);
-        return school;
+        return schools;
     }
 }
