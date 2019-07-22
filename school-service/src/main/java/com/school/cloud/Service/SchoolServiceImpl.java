@@ -47,24 +47,23 @@ public class SchoolServiceImpl implements SchoolService{
         String connName = query.getRoot();
         String connPassword = query.getPassword();
         String exeQuery = query.getQuery();
-        String myDriver = query.getMyDriver();
+        String database = query.getDatabase();
         String myUrl =  query.getMyUrl();
-//        System.out.println(connName);
-//        System.out.println(connPassword);
-//        System.out.println(exeQuery);
+
+
+        String url = myUrl+database;
+        System.out.println(url);
 
         School school = new School();
         List<School> schools = new ArrayList<>();
         // create our mysql database connection
         try {
-            // String myDriver = "com.mysql.jdbc.Driver";
+             String myDriver = "com.mysql.jdbc.Driver";
             //String myUrl = "jdbc:mysql://localhost:3306/schooldb";
             Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, connName, connPassword);
+            Connection conn = DriverManager.getConnection(url, connName, connPassword);
 
-            // SQL SELECT query.
-            // if you only need a few columns, specify them by name instead of using "*"
-            // String query = "SELECT * FROM users";
+
 
             // create the java statement
             Statement st = conn.createStatement();
@@ -74,13 +73,13 @@ public class SchoolServiceImpl implements SchoolService{
 
 
             while (rs.next()) {
+//Set to the school object
                 school.setId(rs.getString("id"));
                 school.setName(rs.getString("name"));
                 school.setCity(rs.getString("city"));
 
                 schools.add(school);
-                // print the results
-                //System.out.format("%s, %s, %s\n", id, name, city);
+
             }
             st.close();
         }catch (Exception e){
